@@ -6,7 +6,7 @@ import { SearchTable } from '@/modules/module/components/SearchTable';
 import { Pagination } from '@/modules/module/components/Pagination';
 import { DetailModal } from '@/modules/module/components/DetailModal';
 
-import { DATA } from '@/lib/mock/data.mock';
+import { DATA } from '@/lib/mocks/data.mock';
 
 export const SearchContextualScreen = () => {
   const navigate = useNavigate();

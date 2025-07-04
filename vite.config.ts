@@ -22,9 +22,6 @@ export default defineConfig(({ mode }) => {
           react: { singleton: true },
           'react-dom': { singleton: true },
           'react-router-dom': { singleton: true },
-          '@ps-common-front/auth-sync': {
-            singleton: true,
-          },
         },
       }),
     ],

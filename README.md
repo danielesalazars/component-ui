@@ -1,10 +1,10 @@
-# MicroFront
+# Component UI
 
-Es un Aplicaciónn con MicroFront con Arquitectura Modular, la cual a sido desarrollada en **React + Vite** y que utliza **Module Federation**.
+Es un Aplicaciónn con Temporal para Componentes UI con Arquitectura Modular, la cual a sido desarrollada en **React + Vite** y que utliza **Module Federation**.
 
 ## 🎯 Propósito
 
-Este proyecto tiene como objetivo proporcionar un **MicroFront** que contará con los componmentes visuales y páginas del Microfront el cual será consumido a tráves de **Module Federation**.
+Este proyecto tiene como objetivo proporcionar **Componentes UI**
 
 ## 🧠 ¿Qué nos ofrece?
 
@@ -27,7 +27,6 @@ Este proyecto tiene como objetivo proporcionar un **MicroFront** que contará co
 ```text
 microfront/
 ├── public/                    # Archivos públicos accesibles directamente
-├── scripts/                   # Scripts adicionales para automatización o checks
 ├── test/                      # Pruebas unitarias globales con Vitest
 ├── src/                       # Código fuente principal del Microfront
 │   ├── assets/                # Recursos estáticos (imágenes, fuentes, etc.)
@@ -36,19 +35,19 @@ microfront/
 │   │   ├── config/            # Configuración global (e.g. MSAL, env vars)
 │   │   ├── constants/         # Constantes usadas en todo el proyecto
 │   │   ├── exceptions/        # Manejo centralizado de errores/excepciones
+│   │   ├── mocks/             # Mocks de prueba temporal
 │   │   ├── utils/             # Funciones helper reutilizables
 │   │   └── validations/       # Lógica de validación (e.g. campos, formularios)
 │   ├── modules/               # Módulos del Microfront
 │   │   ├── module/            # Módulo específico del Microfront
 │   │       ├── components/    # Componentes reutilizables globales del módulo
-│   │       │   ├── NotFound/  # Pantalla completa del NotFound para este módulo
+│   │       │   ├── [CMP-01]/  # Pantalla de componente para Modulo X
 │   │       ├── hooks/         # Hooks personalizados de React para el módulo
 │   │       ├── layouts/       # Layouts para la estructura base de páginas del módulo
 │   │       ├── pages/         # Páginas base para rutas sencillas del módulo
 │   │       ├── screens/       # Pantallas o features completas divididas por carpeta
 │   │       └── services/      # Comunicación con microservicios Backend desde este módulo
 │   ├── routes/                # Configuración y definición centralizada de rutas
-├── .env.local                 # Variables de entorno privadas (IDs, URLs)
 ├── .env.sonar.local           # Variables de entorno privadas para sonar (IDs, URLs)
 ├── index.html                 # HTML base que Vite usa como plantilla
 ├── package.json               # Dependencias y scripts del proyecto
@@ -81,29 +80,13 @@ microfront/
 | `pnpm test:coverage` | Ejecuta las pruebas y genera un reporte de cobertura (usa `scripts/check.test.js`).                                       |
 | `pnpm sonar`         | Ejecuta las pruebas y luego el análisis de calidad de código con **SonarQube** utilizando el token de `.env.sonar.local`. |
 
-### ⚠️ Notas Importantes
-
-Actualmente la dependencia **@ps-common-front/auth-sync** están referenciada localmente:
-
-```json
-"@ps-common-front/auth-sync": "file:/Users/dsalazar/Proyectos/PacificoSalud/ps-common-front/packages/auth-sync"
-```
-
-Una vez que el paquete sea publicado como artefacto en el feed privado (Azure DevOps Artifacts), dicha línea será reemplazada por su versión publicada:
-
-```json
-"@ps-common-front/auth-sync": "^1.0.0"
-```
-
-Esto facilitará la distribución y consumo del paquete entre proyectos sin necesidad de rutas locales.
-
 ## 🚀 Primeros pasos
 
 ### 1️⃣ Clonar el repositorio
 
 ```bash
 git clone [URL_DEL_REPOSITORIO]
-cd microfront
+cd component-ui
 ```
 
 ### 2️⃣ Instalar dependencias
@@ -113,48 +96,4 @@ Se recomienda el gesto de paquetes **pnpm** para este proyecto:
 ```bash
 pnpm i
 # (También puedes usar npm o yarn si es necesario)
-```
-
-### ⚠️ Importante: Sincronizar cambios de librerías locales
-Si se realizan cambios en un paquete local **@ps-common-front/auth-sync**, es obligatorio ejecutar:
-
-```bash
-pnpm install --lockfile-only
-```
-Esto actualiza el **pnpm-lock.yaml** para que el proyecto reconozca la versión más reciente del paquete local sin reinstalar todos los módulos.
-Si aún persisten problemas (como variables no reflejadas o comportamiento desactualizado), realiza una limpieza completa:
-
-```bash
-rm -rf node_modules .pnpm pnpm-lock.yaml
-pnpm install
-```
-
-### 3️⃣ Configuración de entorno
-
-Crea tu archivo **.env.local** con los datos de Azure y Microfront:
-
-```bash
-VITE_CLIENT_ID=<tu_client_id>
-VITE_TENANT_ID=<tu_tenant_id>
-VITE_REDIRECT_URI=http://localhost:3001
-VITE_SPACONTAINER_URI=http://localhost:3000
-VITE_STAGE_MOD=prod
-```
-
-## ✅ Pruebas
-
-Usamos **Vitest** junto a **@testing-library/react** para pruebas unitarias.
-Cada componente puede tener su prueba asociada en **test/\*_/_.test.tsx**.
-La cobertura es generada automáticamente en **coverage/lcov.info**.
-
-## 🔧 Module Federation
-
-La configuración remota está definida en **vite.config.ts.**
-
-**Ejemplo:**
-
-```typescript
-exposes: {
-  './RemoteMicrofront': './src/App.tsx',
-},
 ```
