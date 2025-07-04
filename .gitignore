@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+**/coverage/
+.scannerwork/
+
+# Misc
+**/package-lock.json
+**/yarn.lock
+tsconfig.tsbuildinfo
+
+# Other
+.__mf__temp/
